@@ -8,6 +8,8 @@ $sourceFileName = "cfAppsData_" + $fileIdentifier + ".txt"
 $targetFileName = "EBSS_Results_" + $fileIdentifier + ".txt"
 $serviceSourceFile = "_ServiceNames_2.txt"
 
+Remove-Item -Path $targetFileName
+
 
 ForEach ($serviceName in (Get-Content -Path $serviceSourceFile)){
      $cmd = "./PrintServiceStatus " `
@@ -15,5 +17,6 @@ ForEach ($serviceName in (Get-Content -Path $serviceSourceFile)){
              + " -targetFileName " + $targetFileName `
              + " -serviceName " + $serviceName
     write-host $cmd
-     Invoke-Expression $cmd
+     $safeToContinue = Invoke-Expression $cmd
+     Write-Host $safeToContinue
 }
