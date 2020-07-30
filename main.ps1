@@ -5,17 +5,18 @@ if($args){
   $fileIdentifier = Get-Date -Format "yyyyMMdd_HHmm"
 }
 # duplicated logic with fileName 
-$sourceFileName = "cfAppsData_" + $fileIdentifier + ".data"
-$outFileName = "EBSS_Results_" + $fileIdentifier + ".data"
+$sourceFileName = "cfAppsData_" + $fileIdentifier + ".txt"
+$targetFileName = "EBSS_Results_" + $fileIdentifier + ".txt"
+$serviceSourceFile = "_ServiceNames_2.txt"
 Write-Host "Calling GetAppsData.ps1 to create data file: " $sourceFileName
 Invoke-Expression "./GetAppsData.ps1 $fileIdentifier"
 
-#Write-Host "outFileName = " $outFileName
 
- ForEach ($serviceName in (Get-Content -Path ServiceNames.txt)){
+
+ ForEach ($serviceName in (Get-Content -Path $serviceSourceFile)){
      $cmd = "./PrintServiceStatus " `
              + " -sourceFileName " + $sourceFileName `
-             + " -targetFileName " + $outFileName `
+             + " -targetFileName " + $targetFileName `
              + " -serviceName " + $serviceName
     write-host $cmd
      Invoke-Expression $cmd

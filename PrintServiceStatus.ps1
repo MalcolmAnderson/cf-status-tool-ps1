@@ -1,5 +1,8 @@
-param ($sourceFileName, $serviceName)
+param ($sourceFileName, $targetFileName, $serviceName)
 
-Write-Host $serviceName -NoNewline
-cat ($sourceFileName) | Select-String -pattern $serviceName
-Write
+Add-Content -Path $targetFileName $serviceName
+$statusline = cat ($sourceFileName) | Select-String -pattern $serviceName
+$statusline = "     " + $statusline
+Add-Content -Path $targetFileName $statusline
+Add-Content -Path $targetFileName ""
+
