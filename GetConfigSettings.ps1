@@ -7,7 +7,7 @@ cf env prod-dal-mbrshp-bff-ebssbff-5-2-43 | Select-String -pattern oauthServer.b
 cf env prod-dal-mbrshp-bff-ebssbff-5-2-43 | Select-String -pattern GIT_BRANCH:
 cf env prod-dal-mbrshp-bff-ebssbff-5-2-43 | Select-String -pattern CONFIG_PROFILE:
 cf env prod-dal-mbrshp-bff-ebssbff-5-2-43 | Select-String -pattern CONFIG_LABEL:
-cf env prod-dal-mbrshp-bff-ebssbff-5-2-43 | Select-String -pattern CONFIG_LABEL:
+
 #Echo out a new line
 
 

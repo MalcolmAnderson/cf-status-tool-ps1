@@ -9,6 +9,5 @@ if([string]::IsNullOrEmpty($statusline)){
 }
 $statusline = "     " + $statusline
 Add-Content -Path $targetFileName $statusline
-Add-Content -Path $targetFileName ""
 
 return $safeToContinue

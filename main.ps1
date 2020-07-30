@@ -6,18 +6,19 @@ if($args){
 }
 # duplicated logic with fileName 
 $sourceFileName = "cfAppsData_" + $fileIdentifier + ".txt"
-$targetFileName = "EBSS_Results_" + $fileIdentifier + ".txt"
+$targetFileName = "App_Results_" + $fileIdentifier + ".txt"
 $serviceSourceFile = "_ServiceNames_2.txt"
-Write-Host "Calling GetAppsData.ps1 to create data file: " $sourceFileName
-Invoke-Expression "./GetAppsData.ps1 $fileIdentifier"
+
+Write-Host "Writing start applications to data file: " $sourceFileName
+$cmd = "cf apps | Select-String -Pattern started > $sourceFileName"
+Invoke-Expression $cmd
 
 
-
- ForEach ($serviceName in (Get-Content -Path $serviceSourceFile)){
-     $cmd = "./PrintServiceStatus " `
-             + " -sourceFileName " + $sourceFileName `
-             + " -targetFileName " + $targetFileName `
-             + " -serviceName " + $serviceName
+ForEach ($serviceName in (Get-Content -Path $serviceSourceFile)){
+    $cmd = "./PrintServiceStatus " `
+            + " -sourceFileName " + $sourceFileName `
+            + " -targetFileName " + $targetFileName `
+            + " -serviceName " + $serviceName
     write-host $cmd
-     Invoke-Expression $cmd
+    Invoke-Expression $cmd
  }
